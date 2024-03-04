@@ -42,7 +42,6 @@ CREATE TABLE Teater (
 
 CREATE TABLE Sal (
     navn VARCHAR(55) PRIMARY KEY,
-    antall 
 )
 
 /*
