@@ -49,26 +49,26 @@ CREATE TABLE AnsattTil (
 
 CREATE TABLE Sal (
     id INT PRIMARY KEY UNIQUE NOT NULL,
-    navn TEXT,
-    antallseter INT, 
-    teater_id INT,
+    navn TEXT NOT NULL,
+    antallseter INT NOT NULL, 
+    teater_id INT NOT NULL,
     FOREIGN KEY (teater_id) REFERENCES Teater(id),
     UNIQUE (navn, teater_id)
 );
 
 CREATE TABLE Omraade (
     id INT PRIMARY KEY UNIQUE NOT NULL,
-    navn TEXT,
-    sal_id TEXT,
+    navn TEXT NOT NULL,
+    sal_id TEXT NOT NULL,
     FOREIGN KEY (sal_id) REFERENCES Sal(id),
     UNIQUE (navn, sal_id) 
 );
 
 CREATE TABLE Sete (
     id INT PRIMARY KEY UNIQUE NOT NULL,
-    setenr INT, 
-    radnr INT, 
-    omraade_id INT,
+    setenr INT NOT NULL, 
+    radnr INT NOT NULL, 
+    omraade_id INT NOT NULL,
     FOREIGN KEY (omraade_id) REFERENCES Omraade(id),
     UNIQUE (setenr, radnr, omraade_id)
 
@@ -76,9 +76,9 @@ CREATE TABLE Sete (
 
 CREATE TABLE Forestilling (
     id INT PRIMARY KEY UNIQUE,
-    tidspunkt DATETIME,
-    teaterstykke_navn TEXT,
-    sal_id TEXT,
+    tidspunkt DATETIME NOT NULL,
+    teaterstykke_navn TEXT NOT NULL,
+    sal_id TEXT NOT NULL,
     FOREIGN KEY (teaterstykke_navn) REFERENCES Teaterstykke(navn),
     FOREIGN KEY (sal_id) REFERENCES Sal(id),
     UNIQUE (tidspunkt, teaterstykke_navn)
@@ -86,17 +86,17 @@ CREATE TABLE Forestilling (
 
 CREATE TABLE Billett (
     id INT PRIMARY KEY UNIQUE,
-    pris INT,
-    billettype TEXT,
-    teaterstykke_navn TEXT,
+    pris INT NOT NULL,
+    billettype TEXT NOT NULL,
+    teaterstykke_navn TEXT NOT NULL,
     FOREIGN KEY (teaterstykke_navn) REFERENCES Teaterstykke(navn),
     UNIQUE (billettype, teaterstykke_navn)
 );
 
 CREATE TABLE Rolle (
-    navn TEXT,
-    skuespiller_id INT,
-    akt_id INT,
+    navn TEXT NOT NULL,
+    skuespiller_id INT NOT NULL,
+    akt_id INT NOT NULL,
     FOREIGN KEY (skuespiller_id) REFERENCES Skuespiller(id),
     FOREIGN KEY (akt_id) REFERENCES Akt(id),
     PRIMARY KEY (navn, skuespiller_id, akt_id),
@@ -105,20 +105,20 @@ CREATE TABLE Rolle (
 
 
 CREATE TABLE Bestilling (
-    id INT PRIMARY KEY UNIQUE,
-    forestilling_id INT,
-    tidspunkt DATETIME,
-    kunde_telefon TEXT,
+    id INT PRIMARY KEY UNIQUE NOT NULL,
+    forestilling_id INT NOT NULL,
+    tidspunkt DATETIME NOT NULL,
+    kunde_telefon TEXT NOT NULL,
   
     FOREIGN KEY (forestilling_id) REFERENCES Forestilling(id),
     FOREIGN KEY (kunde_telefon) REFERENCES Kundeprofil(telefon)
     
 );
 
-CREATE TABLE BillettTilBestilling (
-    bestilling_id INT,
-    billett_id INT,
-    antall INT, 
+CREATE TABLE BilletterTilBestilling (
+    bestilling_id INT NOT NULL,
+    billett_id INT NOT NULL,
+    antall INT NOT NULL, 
     FOREIGN KEY (bestilling_id) REFERENCES Bestilling(id),
     FOREIGN KEY (billett_id) REFERENCES Billett(id),
 
@@ -127,9 +127,9 @@ CREATE TABLE BillettTilBestilling (
 );
 
 
-CREATE TABLE SeteIBestilling (
-    sete_id INT,
-    bestilling_id INT,
+CREATE TABLE SeterTilBestilling (
+    sete_id INT NOT NULL, 
+    bestilling_id INT NOT NULL,
     FOREIGN KEY (sete_id) REFERENCES Sete(id),
     FOREIGN KEY (bestilling_id) REFERENCES Bestilling(id),
     PRIMARY KEY (sete_id, bestilling_id),
