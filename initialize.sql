@@ -1,14 +1,11 @@
 CREATE TABLE Teater (
-    id INT PRIMARY KEY NOT NULL UNIQUE,
-    navn TEXT NOT NULL,
+    navn TEXT NOT NULL PRIMARY KEY UNIQUE,
     direktoer_id INT NOT NULL,
     CONSTRAINT fk_direktoer_id FOREIGN KEY (direktoer_id) REFERENCES Ansatt(id)
 );
 
 CREATE TABLE Teaterstykke(
-    navn TEXT PRIMARY KEY UNIQUE NOT NULL,
-    teater_id INT NOT NULL,
-  CONSTRAINT fk_teater_id  FOREIGN KEY (teater_id) REFERENCES Teater(id)
+     navn TEXT NOT NULL PRIMARY KEY UNIQUE
 );
 
 CREATE TABLE Akt (
@@ -16,7 +13,7 @@ CREATE TABLE Akt (
     navn TEXT,
     teaterstykke_navn TEXT NOT NULL,
     CONSTRAINT fk_teaterstykke_navn FOREIGN KEY (teaterstykke_navn) REFERENCES Teaterstykke(navn),
-    
+
     PRIMARY KEY (nummer, teaterstykke_navn),
     UNIQUE (nummer, teaterstykke_navn)
 );
@@ -28,14 +25,14 @@ CREATE TABLE Kundeprofil (
 );
 
 CREATE TABLE Ansatt (
-    id INT PRIMARY KEY UNIQUE,
+    id INTEGER PRIMARY KEY UNIQUE NOT NULL ,
     navn TEXT NOT NULL,
     epost TEXT NOT NULL,
     ansattstatus TEXT NOT NULL
 );
 
 CREATE TABLE Skuespiller(
-    id INT PRIMARY KEY UNIQUE NOT NULL,
+    id INTEGER PRIMARY KEY UNIQUE NOT NULL ,
     navn TEXT NOT NULL,
     epost TEXT NOT NULL
 );
@@ -44,6 +41,7 @@ CREATE TABLE AnsattTil (
     ansatt_id INT NOT NULL ,
     teaterstykke_navn TEXT NOT NULL,
     typejobb TEXT NOT NULL,
+
     CONSTRAINT fk_ansatt_id FOREIGN KEY (ansatt_id) REFERENCES Ansatt(id),
     CONSTRAINT fk_teaterstykke_navn FOREIGN KEY (teaterstykke_navn) REFERENCES Teaterstykke(navn),
     PRIMARY KEY (ansatt_id, teaterstykke_navn),
@@ -66,8 +64,7 @@ CREATE TABLE Omraade (
     navn TEXT NOT NULL,
     sal_navn TEXT NOT NULL,
     teater_navn TEXT NOT NULL,
-   CONSTRAINT fk_sal_navn  FOREIGN KEY (sal_navn) REFERENCES Sal(navn),
-    CONSTRAINT fk_teater_navn FOREIGN KEY (teater_navn) REFERENCES Teater(navn),
+    CONSTRAINT fk_sal_key FOREIGN KEY (sal_navn, teater_navn) REFERENCES Sal(navn, teater_navn),
 
     PRIMARY KEY (navn, sal_navn, teater_navn),
     UNIQUE (navn, sal_navn, teater_navn)
@@ -82,13 +79,11 @@ CREATE TABLE Rad (
     sal_navn TEXT NOT NULL,
     teater_navn TEXT NOT NULL,
 
-   CONSTRAINT fk_omraade_navn FOREIGN KEY (omraade_navn) REFERENCES Omraade(navn),
-    CONSTRAINT fk_sal_navn FOREIGN KEY (sal_navn) REFERENCES Sal(navn),
-    CONSTRAINT fk_teater_navn FOREIGN KEY (teater_navn) REFERENCES Teater(navn),
+    CONSTRAINT fk_omraade_key FOREIGN KEY (omraade_navn,sal_navn, teater_navn) REFERENCES Omraade(navn, sal_navn, teater_navn),
 
-
-    PRIMARY KEY (rad_nr, omraade_navn, sal_navn, teater_navn) ,
+    PRIMARY KEY (rad_nr, omraade_navn, sal_navn, teater_navn),
     UNIQUE (rad_nr, omraade_navn, sal_navn, teater_navn)
+
 
 );
 
@@ -100,11 +95,7 @@ CREATE TABLE Sete (
     sal_navn TEXT NOT NULL,
     teater_navn TEXT NOT NULL,
 
-    CONSTRAINT fk_rad_nr FOREIGN KEY (rad_nr) REFERENCES Rad(rad_nr),
-   CONSTRAINT fk_omraade_navn FOREIGN KEY (omraade_navn) REFERENCES Omraade(navn),
-    CONSTRAINT fk_sal_navn FOREIGN KEY (sal_navn) REFERENCES Sal(navn),
-    CONSTRAINT fk_teater_navn FOREIGN KEY (teater_navn) REFERENCES Teater(navn),
-
+    CONSTRAINT fk_rad_key FOREIGN KEY (rad_nr, omraade_navn, sal_navn, teater_navn) REFERENCES Rad(rad_nr, omraade_navn, sal_navn, teater_navn),
 
     PRIMARY KEY (sete_nr, rad_nr, omraade_navn, sal_navn, teater_navn),
     UNIQUE (sete_nr, rad_nr, omraade_navn, sal_navn, teater_navn)
@@ -115,6 +106,7 @@ CREATE TABLE Forestilling (
     tidspunkt DATETIME NOT NULL,
     teaterstykke_navn TEXT NOT NULL,
     sal_navn TEXT NOT NULL,
+    
    CONSTRAINT fk_teaterstykke_navn FOREIGN KEY (teaterstykke_navn) REFERENCES Teaterstykke(navn),
    CONSTRAINT fk_sal_navn FOREIGN KEY (sal_navn) REFERENCES Sal(navn),
 
@@ -136,21 +128,33 @@ CREATE TABLE Billett (
 CREATE TABLE Rolle (
     navn TEXT NOT NULL,
     skuespiller_id INT NOT NULL,
+    teaterstykke_navn TEXT NOT NULL,
 
+    CONSTRAINT fk_teaterstykke_navn FOREIGN KEY (teaterstykke_navn) REFERENCES Teaterstykke(navn),
+    CONSTRAINT fk_skuespiller_id FOREIGN KEY (skuespiller_id) REFERENCES Skuespiller(id),
+    
+    PRIMARY KEY (navn, skuespiller_id, teaterstykke_navn),
+    UNIQUE (navn, skuespiller_id, teaterstykke_navn)
+ 
+);
+
+CREATE TABLE RolleIAkt (
+    rolle_navn TEXT NOT NULL,
+    skuespiller_id INT NOT NULL,
+    teaterstykke_navn TEXT NOT NULL,
     akt_nummer INT NOT NULL,
     akt_teaterstykke_navn TEXT NOT NULL,
 
-    CONSTRAINT fk_skuespiller_id FOREIGN KEY (skuespiller_id) REFERENCES Skuespiller(id),
+    CONSTRAINT fk_rolle_key FOREIGN KEY (rolle_navn, skuespiller_id, teaterstykke_navn) REFERENCES Rolle(navn, skuespiller_id, teaterstykke_navn),
     CONSTRAINT fk_akt_key FOREIGN KEY (akt_nummer, akt_teaterstykke_navn) REFERENCES Akt(nummer, teaterstykke_navn),
     
-    PRIMARY KEY (navn, skuespiller_id, akt_nummer, akt_teaterstykke_navn),
-    UNIQUE (navn, skuespiller_id, akt_nummer, akt_teaterstykke_navn)
- 
+    PRIMARY KEY (rolle_navn, skuespiller_id, teaterstykke_navn, akt_nummer, akt_teaterstykke_navn),
+    UNIQUE (rolle_navn, skuespiller_id, teaterstykke_navn, akt_nummer, akt_teaterstykke_navn)
 );
 
 
 CREATE TABLE Bestilling (
-    id INT PRIMARY KEY UNIQUE NOT NULL,
+    id INTEGER PRIMARY KEY UNIQUE NOT NULL ,
     forestilling_navn INT NOT NULL,
     forestilling_tidspunkt DATETIME NOT NULL,
     tidspunkt DATETIME NOT NULL,

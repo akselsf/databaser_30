@@ -19,3 +19,4 @@ Antagelser
 - En sal kan ha mange områder
 - En bestilling må inneholde minst en billett.
 - En skuespiller kan ha flere roller i en akt.
+- To roller i samme akt kan ikke ha samme navn
