@@ -1,10 +1,10 @@
 import sqlite3
 
-con = sqlite3.connect("db.sqlite3")
+con = sqlite3.connect("db2.sqlite3")
 
 cur = con.cursor()
 
-file = open("initialise.sql", "r")
+file = open("initialize.sql", "r")
 
 cur.executescript(file.read())
 
