@@ -70,10 +70,9 @@ CREATE TABLE Omraade (
 
 );
 
-CREATE TABLE Sete (
+CREATE TABLE Rad (
 
-    setenr INT NOT NULL, 
-    radnr INT NOT NULL, 
+    rad_nr INT NOT NULL, 
     omraade_navn TEXT NOT NULL,
     sal_navn TEXT NOT NULL,
     teater_navn TEXT NOT NULL,
@@ -83,7 +82,25 @@ CREATE TABLE Sete (
     CONSTRAINT fk_teater_navn FOREIGN KEY (teater_navn) REFERENCES Teater(navn),
 
 
-    PRIMARY KEY (setenr, radnr, omraade_navn, sal_navn, teater_navn) 
+    PRIMARY KEY (rad_nr, omraade_navn, sal_navn, teater_navn) 
+
+);
+
+CREATE TABLE Sete (
+
+    sete_nr INT NOT NULL, 
+    rad_nr INT NOT NULL, 
+    omraade_navn TEXT NOT NULL,
+    sal_navn TEXT NOT NULL,
+    teater_navn TEXT NOT NULL,
+
+    CONSTRAINT fk_rad_nr FOREIGN KEY (rad_nr) REFERENCES Rad(rad_nr),
+   CONSTRAINT fk_omraade_navn FOREIGN KEY (omraade_navn) REFERENCES Omraade(navn),
+    CONSTRAINT fk_sal_navn FOREIGN KEY (sal_navn) REFERENCES Sal(navn),
+    CONSTRAINT fk_teater_navn FOREIGN KEY (teater_navn) REFERENCES Teater(navn),
+
+
+    PRIMARY KEY (sete_nr, rad_nr, omraade_navn, sal_navn, teater_navn) 
 
 );
 
@@ -114,7 +131,7 @@ CREATE TABLE Rolle (
     CONSTRAINT fk_skuespiller_id FOREIGN KEY (skuespiller_id) REFERENCES Skuespiller(id),
     CONSTRAINT fk_akt_id FOREIGN KEY (akt_id) REFERENCES Akt(id),
     
-    PRIMARY KEY (navn, skuespiller_id, akt_id),
+    PRIMARY KEY (navn, skuespiller_id, akt_id)
  
 );
 
@@ -149,15 +166,15 @@ CREATE TABLE SeterTilBestilling (
     
     bestilling_id INT NOT NULL,
     
-    setenr INT NOT NULL,
-    radnr INT NOT NULL,
+    sete_nr INT NOT NULL,
+    rad_nr INT NOT NULL,
     omraade_navn TEXT NOT NULL,
     sal_navn TEXT NOT NULL,
     teater_navn TEXT NOT NULL,
 
     CONSTRAINT fk_sete_key
-        FOREIGN KEY (setenr, radnr, omraade_navn, sal_navn, teater_navn) 
-            REFERENCES Sete(setenr, radnr, omraade_navn, sal_navn, teater_navn),
+        FOREIGN KEY (sete_nr, rad_nr, omraade_navn, sal_navn, teater_navn) 
+            REFERENCES Sete(sete_nr, rad_nr, omraade_navn, sal_navn, teater_navn),
 
-    PRIMARY KEY (bestilling_id, setenr, radnr, omraade_navn, sal_navn, teater_navn) 
+    PRIMARY KEY (bestilling_id, sete_nr, rad_nr, omraade_navn, sal_navn, teater_navn) 
 );
