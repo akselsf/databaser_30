@@ -4,7 +4,6 @@ Antagelser
 - Et teater kan kun ha én direktør
 - Et teater må ha minst én sal
 - En sal tilhører kun ett og alltid ett teater
-- En ansatt må være ansatt til minst ett stykke
 - Et stykke må ha minst en ansatt
 - En skuespiller må minst være med i én akt
 - Det må være minst en skuspiller i hver akt
@@ -19,4 +18,4 @@ Antagelser
 - Et område har bare en sal. 
 - En sal kan ha mange områder
 - En bestilling må inneholde minst en billett.
-- Område 
+- En skuespiller kan ha flere roller i en akt.
