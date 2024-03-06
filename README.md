@@ -19,3 +19,4 @@ Antagelser
 - Et område har bare en sal. 
 - En sal kan ha mange områder
 - En bestilling må inneholde minst en billett.
+- Område 
