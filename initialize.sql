@@ -107,9 +107,10 @@ CREATE TABLE Forestilling (
     tidspunkt DATETIME NOT NULL,
     teaterstykke_navn TEXT NOT NULL,
     sal_navn TEXT NOT NULL,
+    teater_navn TEXT NOT NULL,
     
    CONSTRAINT fk_teaterstykke_navn FOREIGN KEY (teaterstykke_navn) REFERENCES Teaterstykke(navn) ON DELETE CASCADE ON UPDATE CASCADE,
-   CONSTRAINT fk_sal_navn FOREIGN KEY (sal_navn) REFERENCES Sal(navn) ON DELETE CASCADE ON UPDATE CASCADE,
+   CONSTRAINT fk_sal_navn FOREIGN KEY (sal_navn, teater_navn) REFERENCES Sal(navn, teater_navn) ON DELETE CASCADE ON UPDATE CASCADE,
 
     PRIMARY KEY (tidspunkt, teaterstykke_navn),
     UNIQUE (tidspunkt, teaterstykke_navn)
