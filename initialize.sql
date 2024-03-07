@@ -175,11 +175,11 @@ CREATE TABLE BilletterTilBestilling (
     
     antall INT NOT NULL, 
     CONSTRAINT fk_forestilling_navn FOREIGN KEY (forestilling_navn, forestilling_tidspunkt) REFERENCES Forestilling(navn, tidspunkt) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT fk_billett_billettype FOREIGN KEY (billettype) REFERENCES Billett(billettype) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_billettype FOREIGN KEY (billettype) REFERENCES Billett(billettype) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT fk_bestilling_id FOREIGN KEY (bestilling_id) REFERENCES Bestilling(id) ON DELETE CASCADE ON UPDATE CASCADE,
 
-    PRIMARY KEY (bestilling_id, forestilling_navn, billett_billettype),
-    UNIQUE (bestilling_id, forestilling_navn, billett_billettype)
+    PRIMARY KEY (bestilling_id, forestilling_navn, billettype),
+    UNIQUE (bestilling_id, forestilling_navn, billettype)
 );
 
 
