@@ -7,6 +7,7 @@ CREATE TABLE Teater (
 
 CREATE TABLE Teaterstykke(
      navn TEXT NOT NULL PRIMARY KEY UNIQUE,
+     teater_navn TEXT NOT NULL,
      CONSTRAINT fk_teater_navn FOREIGN KEY (teater_navn) REFERENCES Teater(navn)
      ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -31,14 +32,14 @@ CREATE TABLE Kundeprofil (
 CREATE TABLE Ansatt (
     id INTEGER PRIMARY KEY UNIQUE NOT NULL ,
     navn TEXT NOT NULL,
-    epost TEXT NOT NULL,
+    epost TEXT NOT NULL UNIQUE,
     ansattstatus TEXT NOT NULL
 );
 
 CREATE TABLE Skuespiller(
     id INTEGER PRIMARY KEY UNIQUE NOT NULL ,
     navn TEXT NOT NULL,
-    epost TEXT NOT NULL
+    epost TEXT NOT NULL UNIQUE
 );
 
 CREATE TABLE AnsattTil (
@@ -54,9 +55,7 @@ CREATE TABLE AnsattTil (
 );
 
 CREATE TABLE Sal (
-
     navn TEXT NOT NULL,
-    antallseter INT NOT NULL, 
     teater_navn TEXT NOT NULL,
     CONSTRAINT fk_teater_navn FOREIGN KEY (teater_navn) REFERENCES Teater(navn) ON DELETE CASCADE ON UPDATE CASCADE,
 
@@ -72,8 +71,6 @@ CREATE TABLE Omraade (
 
     PRIMARY KEY (navn, sal_navn, teater_navn),
     UNIQUE (navn, sal_navn, teater_navn)
-
-
 );
 
 CREATE TABLE Rad (
@@ -146,6 +143,7 @@ CREATE TABLE RolleIAkt (
     rolle_navn TEXT NOT NULL,
     skuespiller_id INT NOT NULL,
     teaterstykke_navn TEXT NOT NULL,
+
     akt_nummer INT NOT NULL,
     akt_teaterstykke_navn TEXT NOT NULL,
 
@@ -165,19 +163,19 @@ CREATE TABLE Bestilling (
     kunde_telefon TEXT NOT NULL,
 
     CONSTRAINT fk_forestilling_key FOREIGN KEY (forestilling_navn, forestilling_tidspunkt) REFERENCES Forestilling(tidspunkt, teaterstykke_navn) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT fk_kunde_telefon FOREIGN KEY (kunde_telefon) REFERENCES Kundeprofil(telefon) ON DELETE CASCADE ON UPDATE CASCADE,
-    
+    CONSTRAINT fk_kunde_telefon FOREIGN KEY (kunde_telefon) REFERENCES Kundeprofil(telefon) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE BilletterTilBestilling (
     bestilling_id INT NOT NULL,
 
     forestilling_navn INT NOT NULL,
-    billett_billettype TEXT NOT NULL,
+    forestilling_tidspunkt DATETIME NOT NULL,
+    billettype TEXT NOT NULL,
     
     antall INT NOT NULL, 
-    CONSTRAINT fk_forestilling_navn FOREIGN KEY (forestilling_navn) REFERENCES Forestilling(tidspunkt) ON DELETE CASCADE ON UPDATE CASCADE,
-    CONSTRAINT fk_billett_billettype FOREIGN KEY (billett_billettype) REFERENCES Billett(billettype) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_forestilling_navn FOREIGN KEY (forestilling_navn, forestilling_tidspunkt) REFERENCES Forestilling(navn, tidspunkt) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_billett_billettype FOREIGN KEY (billettype) REFERENCES Billett(billettype) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT fk_bestilling_id FOREIGN KEY (bestilling_id) REFERENCES Bestilling(id) ON DELETE CASCADE ON UPDATE CASCADE,
 
     PRIMARY KEY (bestilling_id, forestilling_navn, billett_billettype),

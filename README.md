@@ -20,3 +20,5 @@ Antagelser
 - En bestilling må inneholde minst en billett.
 - En skuespiller kan ha flere roller i en akt.
 - To roller i samme akt kan ikke ha samme navn
+- Det kan ikke være to av samme forestillinger på samme tid
+- Bestillinger har en ID for da dette er praktisk i et ekte scenario
