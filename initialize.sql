@@ -33,7 +33,7 @@ CREATE TABLE Ansatt (
     id INTEGER PRIMARY KEY UNIQUE NOT NULL ,
     navn TEXT NOT NULL,
     epost TEXT NOT NULL UNIQUE,
-    ansattstatus TEXT NOT NULL
+    ansattstatus TEXT NOT NULL 
 );
 
 CREATE TABLE Skuespiller(
@@ -159,7 +159,7 @@ CREATE TABLE Bestilling (
     id INTEGER PRIMARY KEY UNIQUE NOT NULL ,
     forestilling_navn INT NOT NULL,
     forestilling_tidspunkt DATETIME NOT NULL,
-    tidspunkt DATETIME NOT NULL,
+    tidspunkt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     kunde_telefon TEXT NOT NULL,
 
     CONSTRAINT fk_forestilling_key FOREIGN KEY (forestilling_navn, forestilling_tidspunkt) REFERENCES Forestilling(tidspunkt, teaterstykke_navn) ON DELETE CASCADE ON UPDATE CASCADE,
