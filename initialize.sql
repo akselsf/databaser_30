@@ -162,6 +162,8 @@ CREATE TABLE Bestilling (
     tidspunkt DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     kunde_telefon TEXT NOT NULL,
 
+    UNIQUE (forestilling_navn, forestilling_tidspunkt, tidspunkt, kunde_telefon),
+
     CONSTRAINT fk_forestilling_key FOREIGN KEY (forestilling_navn, forestilling_tidspunkt) REFERENCES Forestilling(tidspunkt, teaterstykke_navn) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT fk_kunde_telefon FOREIGN KEY (kunde_telefon) REFERENCES Kundeprofil(telefon) ON DELETE CASCADE ON UPDATE CASCADE
 );
