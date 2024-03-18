@@ -45,7 +45,7 @@ order_id = cur.lastrowid
 cur.execute("INSERT INTO BilletterTilBestilling (bestilling_id, billettype, teaterstykke_navn, antall) VALUES (?, 'Ordinær', 'Størst av alt er kjærligheten', ?)", (order_id, len(sold_seats)))
 
 for i in sold_seats:
-    cur.execute("INSERT INTO SeterTilBestilling (bestilling_id, sete_nr, rad_nr, omraade_navn, sal_navn, teater_navn) VALUES (?, ?, ?, ?, 'Gamle Scene', 'Trøndelag-teater')", (order_id, i[0], i[1], i[2]))
+    cur.execute("INSERT INTO SeterTilBestilling (bestilling_id, sete_nr, rad_nr, omraade_navn, sal_navn, teater_navn) VALUES (?, ?, ?, ?, 'Gamle Scene', 'Trøndelag Teater')", (order_id, i[0], i[1], i[2]))
 
 con.commit()
 con.close()

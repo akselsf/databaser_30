@@ -223,11 +223,11 @@ cur.execute("INSERT INTO RolleIAkt (rolle_navn, skuespiller_id, teaterstykke_nav
 
 
 # Forestillinger
-datoerkongen = ['01:02:2024', '02:02:2024', '03:02:2024', '04:02:2024', '05:02:2024', '06:02:2024']
+datoerkongen = ['2024-02-01', '2024-02-02', '2024-02-03', '2024-02-04', '2024-02-05', '2024-02-06']
 for i in datoerkongen:
     cur.execute("INSERT INTO Forestilling (tidspunkt, teaterstykke_navn, sal_navn, teater_navn) VALUES (?, 'Kongsemnene', 'Hovedscenen', ?);", (i, teater_navn))
 
-datoerstorstavalt = ['03:02:2024', '06:02:2024', '07:02:2024', '12:02:2024', '13:02:2024', '14:02:2024']
+datoerstorstavalt = ["2024-02-03", "2024-02-06", "2024-02-07", "2024-02-12", "2024-02-13", "2024-02-14"]
 for i in datoerkongen:
     cur.execute("INSERT INTO Forestilling (tidspunkt, teaterstykke_navn, sal_navn, teater_navn) VALUES (?, ?, 'Gamle Scene', ?);", (i, storstavaltnavn, teater_navn))
 
