@@ -34,9 +34,6 @@ for row in rows[0:18]:
 
     row_number+=1
 
-for sold in sold_seats_parkett:
-    print(sold)
-
 cur.execute("INSERT INTO Bestilling (forestilling_navn, forestilling_tidspunkt, kunde_telefon) VALUES ('Kongsemnene', ?,'0');", (date,))
 order_id = str(cur.lastrowid)
 
