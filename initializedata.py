@@ -277,16 +277,17 @@ cur.execute("INSERT INTO AnsattTil (ansatt_id, teaterstykke_navn, typejobb) VALU
 # Kongsemnene
 cur.execute("INSERT INTO Billett (pris, billettype, teaterstykke_navn) VALUES (450, 'Ordinær', 'Kongsemnene');")
 cur.execute("INSERT INTO Billett (pris, billettype, teaterstykke_navn) VALUES (380, 'Honnør', 'Kongsemnene');")
-cur.execute("INSERT INTO Billett (pris, billettype, teaterstykke_navn) VALUES (280, 'Barn/Student', 'Kongsemnene');")
-cur.execute("INSERT INTO Billett (pris, billettype, teaterstykke_navn) VALUES (420, 'Grupper over 10', 'Kongsemnene');")
-cur.execute("INSERT INTO Billett (pris, billettype, teaterstykke_navn) VALUES (150, 'Teaterkort Ung-medlem', 'Kongsemnene');")
+cur.execute("INSERT INTO Billett (pris, billettype, teaterstykke_navn) VALUES (280, 'Student', 'Kongsemnene');")
+cur.execute("INSERT INTO Billett (pris, billettype, teaterstykke_navn) VALUES (420, 'Gruppe 10', 'Kongsemnene');")
+cur.execute("INSERT INTO Billett (pris, billettype, teaterstykke_navn) VALUES (360, 'Gruppe honnør 10', 'Kongsemnene');")
 
 # Størst av alt er kjærligheten
 cur.execute("INSERT INTO Billett (pris, billettype, teaterstykke_navn) VALUES (350, 'Ordinær', ?);", (storstavaltnavn,))
 cur.execute("INSERT INTO Billett (pris, billettype, teaterstykke_navn) VALUES (300, 'Honnør', ?);", (storstavaltnavn,))
-cur.execute("INSERT INTO Billett (pris, billettype, teaterstykke_navn) VALUES (220, 'Barn/Student', ?);", (storstavaltnavn,))
-cur.execute("INSERT INTO Billett (pris, billettype, teaterstykke_navn) VALUES (320, 'Grupper over 10', ?);", (storstavaltnavn,))
-cur.execute("INSERT INTO Billett (pris, billettype, teaterstykke_navn) VALUES (130, 'Teaterkort Ung-medlem', ?);", (storstavaltnavn,))
+cur.execute("INSERT INTO Billett (pris, billettype, teaterstykke_navn) VALUES (220, 'Student', ?);", (storstavaltnavn,))
+cur.execute("INSERT INTO Billett (pris, billettype, teaterstykke_navn) VALUES (220, 'Barn', ?);", (storstavaltnavn,))
+cur.execute("INSERT INTO Billett (pris, billettype, teaterstykke_navn) VALUES (320, 'Gruppe 10', ?);", (storstavaltnavn,))
+cur.execute("INSERT INTO Billett (pris, billettype, teaterstykke_navn) VALUES (270, 'Gruppe honnør 10', ?);", (storstavaltnavn,))
 
 
 # Kundeprofil -  Standardprofil
