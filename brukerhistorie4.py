@@ -4,7 +4,7 @@ con = sqlite3.connect("db2.sqlite3")
 cur = con.cursor()
 
 #Dato hentes som input
-dato = input('''Skriv inn en dato på formatet "år-måned-dag": ''')
+dato = input('''Skriv inn en dato på formatet "YYYY-MM-DD": ''')
 
 if (len(dato.split("-")) != 3):
     print("Skriv inn på riktig format")
