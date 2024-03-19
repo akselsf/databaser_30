@@ -11,11 +11,10 @@ skuespillere_i_stykke = cur.execute('''
     ORDER BY Teaterstykke.navn, Skuespiller.navn
     ''').fetchall()
 
-print(f"------------------------------------------------------------------------------------------------------------------------")
 
 for skuespiller in skuespillere_i_stykke:
     print(f"Stykke: {skuespiller[0]:<30} | Skuespiller: {skuespiller[1]:<30} | Rolle: {skuespiller[2]}")
-    print(f"------------------------------------------------------------------------------------------------------------------------")
+    
 
 con.commit()
 cur.close()
