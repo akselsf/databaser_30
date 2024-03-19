@@ -11,10 +11,10 @@ Oppskrift for brukstilfeller:
 
 For oppgave 3: kjør kommandoen "python brukerhistorie3.py" i prosjektmappen
 
-For oppgave 4: kjør kommandoen "python brukerhistorie4.py" i prosjektmappen, og svar på dato input på formatet YYYY-MM-DD
+For oppgave 4: kjør kommandoen "python brukerhistorie4.py" i prosjektmappen, og svar på dato input på formatet YYYY-MM-DD, eks: 2024-02-03
 
 For oppgave 5: kjør kommandoen "python brukerhistorie5.py" i prosjektmappen
 
 For oppgave 6: kjør kommandoen "python brukerhistorie6.py" i prosjektmappen
 
-For oppgave 7: kjør kommandoen "python brukerhistorie7.py" i prosjektmappen, og svar på skuespillernavn input på med stor forbokstav i fornavn og etternavn, eks: John Doe
+For oppgave 7: kjør kommandoen "python brukerhistorie7.py" i prosjektmappen, og svar på skuespillernavn input på med stor forbokstav i fornavn og etternavn, eks: Arturo Scotti
