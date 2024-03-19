@@ -5,17 +5,18 @@ import sqlite3
 con = sqlite3.connect("db2.sqlite3")
 cur = con.cursor()
 
-# konstanter
+# Definere teater for å unngå eventuelle skrivefeil da vi skal bruke dette flere ganger
 teater_navn = "Trøndelag Teater"
 
-# Direktør og teater
+# Legge inn direktør og teater i databasen
 cur.execute("INSERT INTO ansatt (navn, epost, ansattstatus) VALUES('Elisabeth Egseth Hansen', 'teatersjef@trondelag-teater.no', 'fast');")
 cur.execute("INSERT INTO teater (navn, direktoer_id) VALUES (?, ?);", (teater_navn, str(cur.lastrowid)))
 
-# Sal 
+# Legge inn teaterets saler
 cur.execute("INSERT INTO sal (navn, teater_navn) VALUES (?, 'Hovedscenen');", (teater_navn,))
 cur.execute("INSERT INTO sal (navn, teater_navn) VALUES (?, 'Gamle Scene');", (teater_navn,))
 
+# Legge inn de ulike områdene i salene
 # Områder - Hovedscenen
 cur.execute("INSERT INTO omraade (navn, sal_navn, teater_navn) VALUES ('Parkett', ?, ?);", ("Hovedscenen", teater_navn))
 cur.execute("INSERT INTO omraade (navn, sal_navn, teater_navn) VALUES ('Galleri', ?, ?);", ("Hovedscenen", teater_navn))
@@ -24,7 +25,7 @@ cur.execute("INSERT INTO omraade (navn, sal_navn, teater_navn) VALUES ('Galleri'
 cur.execute("INSERT INTO omraade (navn, sal_navn, teater_navn) VALUES ('Balkong', ?, ?);", ("Gamle Scene", teater_navn))
 cur.execute("INSERT INTO omraade (navn, sal_navn, teater_navn) VALUES ('Parkett', ?, ?);", ("Gamle Scene", teater_navn))
 
-# Rader
+# Legge inn rader i de ulike områdene i Hovedscenen og Gamle Scene
 # Hovedscenen - parkett
 for i in range(1, 19):
     cur.execute("INSERT INTO rad (rad_nr, omraade_navn, sal_navn, teater_navn) VALUES (?, 'Parkett', 'Hovedscenen', ?);", (i, teater_navn))
@@ -41,7 +42,7 @@ for i in range(1, 5):
 for i in range(1, 4):
     cur.execute("INSERT INTO rad (rad_nr, omraade_navn, sal_navn, teater_navn) VALUES (?, 'Galleri', 'Gamle Scene', ?);", (i, teater_navn))
 
-# Seter
+# Legge inn seter i de ulike radene i de ulike områdene i Hovedscenen og Gamle Scene
 # Hovedscenen - parkett
 for i in range(1, 449):
     cur.execute("INSERT INTO sete (sete_nr, rad_nr, omraade_navn, sal_navn, teater_navn) VALUES (?, ?, 'Parkett', 'Hovedscenen', ?);", (i, (i//29) + 1, teater_navn))
@@ -81,19 +82,18 @@ for i in range(1, 4):
     for j in range(1, seterparader[i-1]+1):
         cur.execute("INSERT INTO sete (sete_nr, rad_nr, omraade_navn, sal_navn, teater_navn) VALUES (?, ?, 'Galleri', 'Gamle Scene', ?);", (j, i, teater_navn))
 
-# Teaterstykker 
+# Legge inn teaterstykkene 
 storstavaltnavn = "Størst av alt er kjærligheten"
 cur.execute("INSERT INTO Teaterstykke (navn, teater_navn) VALUES ('Kongsemnene', ?);", (teater_navn,))
 cur.execute("INSERT INTO Teaterstykke (navn, teater_navn) VALUES (?, ?);", (storstavaltnavn, teater_navn,))
 
-# Akter
+# Legge inn aktene i teaterstykkene
 for i in range(1, 6):
     cur.execute("INSERT INTO Akt (nummer, teaterstykke_navn) VALUES (?, 'Kongsemnene');", (str(i),))
 
 cur.execute("INSERT INTO Akt (nummer, teaterstykke_navn) VALUES ('1', ?);", (storstavaltnavn,))
 
-# Skuespillere
-
+# Legge inn de ulike skuespillerne
 cur.execute("INSERT INTO Skuespiller (id, navn, epost) VALUES ('1', 'Arturo Scotti', 'scotti@gmail.com');")
 cur.execute("INSERT INTO Skuespiller (id, navn, epost) VALUES ('2', 'Ingunn Beate Strige Øyen', 'oyen@gmail.com');")
 cur.execute("INSERT INTO Skuespiller (id, navn, epost) VALUES ('3', 'Hans Petter Nilsen', 'hnilsen@gmail.com');")
@@ -115,13 +115,7 @@ cur.execute("INSERT INTO Skuespiller (id, navn, epost) VALUES ('17', 'Trond-Ove 
 cur.execute("INSERT INTO Skuespiller (id, navn, epost) VALUES ('18', 'Natalie Grøndahl Tangen', 'ngtangen@gmail.com');")
 cur.execute("INSERT INTO Skuespiller (id, navn, epost) VALUES ('19', 'Åsmund Flaten', 'aflaten@gmail.com');")
 
-
-
-
-
-
-# Roller
-
+# Legge inn roller i teaterstykkene
 # Roller i Kongsemnene
 cur.execute("INSERT INTO Rolle (navn, skuespiller_id, teaterstykke_navn) VALUES ('Håkon Håkonson', 1, 'Kongsemnene');")
 cur.execute("INSERT INTO Rolle (navn, skuespiller_id, teaterstykke_navn) VALUES ('Dagfinn Bonde', 11, 'Kongsemnene');")
@@ -138,7 +132,6 @@ cur.execute("INSERT INTO Rolle (navn, skuespiller_id, teaterstykke_navn) VALUES 
 cur.execute("INSERT INTO Rolle (navn, skuespiller_id, teaterstykke_navn) VALUES ('Biskop Nikolas', 7, 'Kongsemnene');")
 cur.execute("INSERT INTO Rolle (navn, skuespiller_id, teaterstykke_navn) VALUES ('Peter', 12, 'Kongsemnene');")
 
-
 # Roller i Størst av alt er kjærligheten
 cur.execute("INSERT INTO Rolle (navn, skuespiller_id, teaterstykke_navn) VALUES ('Sunniva Du Mond Nordal', '13', 'Størst av alt er kjærligheten');")
 cur.execute("INSERT INTO Rolle (navn, skuespiller_id, teaterstykke_navn) VALUES ('Jo Saberniak', '14', 'Størst av alt er kjærligheten');")
@@ -149,8 +142,7 @@ cur.execute("INSERT INTO Rolle (navn, skuespiller_id, teaterstykke_navn) VALUES 
 cur.execute("INSERT INTO Rolle (navn, skuespiller_id, teaterstykke_navn) VALUES ('Åsmund Flaten', '19', 'Størst av alt er kjærligheten');")
 
 
-# RolleIAkt
-
+# Legge inn hvilke akter rollene inngår i
 cur.execute("INSERT INTO RolleIAkt (rolle_navn, skuespiller_id, teaterstykke_navn, akt_nummer, akt_teaterstykke_navn) VALUES ('Håkon Håkonson', '1', 'Kongsemnene', '1', 'Kongsemnene');")
 cur.execute("INSERT INTO RolleIAkt (rolle_navn, skuespiller_id, teaterstykke_navn, akt_nummer, akt_teaterstykke_navn) VALUES ('Håkon Håkonson', '1', 'Kongsemnene', '2', 'Kongsemnene');")
 cur.execute("INSERT INTO RolleIAkt (rolle_navn, skuespiller_id, teaterstykke_navn, akt_nummer, akt_teaterstykke_navn) VALUES ('Håkon Håkonson', '1', 'Kongsemnene', '3', 'Kongsemnene');")
@@ -211,8 +203,7 @@ cur.execute("INSERT INTO RolleIAkt (rolle_navn, skuespiller_id, teaterstykke_nav
 cur.execute("INSERT INTO RolleIAkt (rolle_navn, skuespiller_id, teaterstykke_navn, akt_nummer, akt_teaterstykke_navn) VALUES ('Peter', '12', 'Kongsemnene', '4', 'Kongsemnene');")
 cur.execute("INSERT INTO RolleIAkt (rolle_navn, skuespiller_id, teaterstykke_navn, akt_nummer, akt_teaterstykke_navn) VALUES ('Peter', '12', 'Kongsemnene', '5', 'Kongsemnene');")
 
-
-# størst av alt.. roller
+# Størst av alt kjærligheten roller
 cur.execute("INSERT INTO RolleIAkt (rolle_navn, skuespiller_id, teaterstykke_navn, akt_nummer, akt_teaterstykke_navn) VALUES ('Sunniva Du Mond Nordal', '13', 'Størst av alt er kjærligheten', 1,'Størst av alt er kjærligheten');")
 cur.execute("INSERT INTO RolleIAkt (rolle_navn, skuespiller_id, teaterstykke_navn, akt_nummer, akt_teaterstykke_navn) VALUES ('Jo Saberniak', '14', 'Størst av alt er kjærligheten', 1,'Størst av alt er kjærligheten');")
 cur.execute("INSERT INTO RolleIAkt (rolle_navn, skuespiller_id, teaterstykke_navn, akt_nummer, akt_teaterstykke_navn) VALUES ('Marte M. Steinholt', '15', 'Størst av alt er kjærligheten', 1,'Størst av alt er kjærligheten');")
@@ -222,7 +213,7 @@ cur.execute("INSERT INTO RolleIAkt (rolle_navn, skuespiller_id, teaterstykke_nav
 cur.execute("INSERT INTO RolleIAkt (rolle_navn, skuespiller_id, teaterstykke_navn, akt_nummer, akt_teaterstykke_navn) VALUES ('Åsmund Flaten', '19', 'Størst av alt er kjærligheten', 1,'Størst av alt er kjærligheten');")
 
 
-# Forestillinger
+# Legge inn forestillinger
 datoerkongen = ['2024-02-01', '2024-02-02', '2024-02-03', '2024-02-04', '2024-02-05', '2024-02-06']
 for i in datoerkongen:
     cur.execute("INSERT INTO Forestilling (tidspunkt, teaterstykke_navn, sal_navn, teater_navn) VALUES (?, 'Kongsemnene', 'Hovedscenen', ?);", (i, teater_navn))
@@ -232,7 +223,7 @@ for i in datoerkongen:
     cur.execute("INSERT INTO Forestilling (tidspunkt, teaterstykke_navn, sal_navn, teater_navn) VALUES (?, ?, 'Gamle Scene', ?);", (i, storstavaltnavn, teater_navn))
 
 
-# Ansatte / AnsattTil
+# Legge inn de ulike ansatte og hvilke jobber de har
 # Kongen
 cur.execute("INSERT INTO ansatt (navn, epost, ansattstatus) VALUES ('Yury Butusov', 'yury.butusov@trondelag-teater.no', 'fast');") 
 id = cur.lastrowid
@@ -249,7 +240,6 @@ cur.execute("INSERT INTO AnsattTil (ansatt_id, teaterstykke_navn, typejobb) VALU
 cur.execute("INSERT INTO ansatt (navn, epost, ansattstatus) VALUES ('Mina Rype Stokke', 'mina.rype.stokke@trondelag-teater.no', 'fast');")
 id = cur.lastrowid
 cur.execute("INSERT INTO AnsattTil (ansatt_id, teaterstykke_navn, typejobb) VALUES (?, 'Kongsemnene', 'dramaturgi')", (id,))
-
 
 # Størst av alt er kjærligheten
 cur.execute("INSERT INTO ansatt (navn, epost, ansattstatus) VALUES ('Johannes Corell Petersen', 'johannes.corell.petersen@trondelag-teater-no', 'fast');")
@@ -273,7 +263,7 @@ id = cur.lastrowid
 cur.execute("INSERT INTO AnsattTil (ansatt_id, teaterstykke_navn, typejobb) VALUES (?, ?, 'dramaturg')", (id, storstavaltnavn))
 
 
-# Billett 
+# Legge inn de ulike billettypene og prisene 
 # Kongsemnene
 cur.execute("INSERT INTO Billett (pris, billettype, teaterstykke_navn) VALUES (450, 'Ordinær', 'Kongsemnene');")
 cur.execute("INSERT INTO Billett (pris, billettype, teaterstykke_navn) VALUES (380, 'Honnør', 'Kongsemnene');")
@@ -290,8 +280,9 @@ cur.execute("INSERT INTO Billett (pris, billettype, teaterstykke_navn) VALUES (3
 cur.execute("INSERT INTO Billett (pris, billettype, teaterstykke_navn) VALUES (270, 'Gruppe honnør 10', ?);", (storstavaltnavn,))
 
 
-# Kundeprofil -  Standardprofil
+# Legge inn en standard kundeprofil
 cur.execute("INSERT INTO Kundeprofil (navn, telefon, adresse) VALUES ('Gjest', '0', 'Gjest');")
 
+# Bekrefte endringene
 con.commit()
 cur.close()
