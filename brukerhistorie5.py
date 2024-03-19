@@ -3,6 +3,7 @@ import sqlite3
 con = sqlite3.connect("db2.sqlite3")
 cur = con.cursor()
 
+#Finner alle skuespillere tilknyttet et teaterstykke, og hver rolle tilknyttet skuespillere
 skuespillere_i_stykke = cur.execute('''
     SELECT Teaterstykke.navn, Skuespiller.navn, Rolle.navn
     FROM Teaterstykke 

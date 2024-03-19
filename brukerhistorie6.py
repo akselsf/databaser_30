@@ -3,7 +3,7 @@ import sqlite3
 con = sqlite3.connect("db2.sqlite3")
 cur = con.cursor()
 
-
+#Finner alle forestillinger og bestillinger knyttet hver forestilling (med seter solgt), sorterer de på antall seter
 forestillinger = cur.execute(
     '''SELECT Forestilling.teaterstykke_navn, Forestilling.tidspunkt, count(SeterTilBestilling.sete_nr)
     FROM Forestilling 
