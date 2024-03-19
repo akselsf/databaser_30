@@ -10,7 +10,8 @@ Forventet output i de ulike brukstilfellene når kjørt etter hverandre
 2. scan_seats_hovedscenen - "Seter i hovedscenen lagt til i databasen."
 
 3. brukerhistorie3.py
-    - "Bestilling fullført! \nPris for 9 voksenbilletter: kr 3150"
+    - "Bestilling fullført!
+        Pris for 9 voksenbilletter: kr 3150"
     - Ved ingen ledige seter - "Det er desverre ikke 9 ledige plasser på noen rad. Bestilling avbrutt."
 
 4. brukerhistorie4.py
