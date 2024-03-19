@@ -24,12 +24,7 @@ if (len(forestillinger) == 0):
 
 else:
     for forestilling in forestillinger:
-        print(forestilling[0] + " vises på denne datoen, og har solgt " + str(forestilling[1]) + " sete(r)")
-
-
-
-# for forestilling in forestillinger:
-#     print(forestilling[1] + " vises denne datoen, og har solgt " + "2" + " billetter")
+        print(forestilling[0] + " vises på denne datoen, og har solgt " + str(forestilling[1]) + " billetter")
 
 
 con.commit()

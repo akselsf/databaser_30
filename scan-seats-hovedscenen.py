@@ -1,6 +1,4 @@
 import sqlite3
-import time
-from datetime import datetime
 
 con = sqlite3.connect("db2.sqlite3")
 cur = con.cursor()
@@ -11,8 +9,6 @@ with open('hovedscenen.txt', 'r') as file:
 date = 0
 
 for line in lines:
-    # print(line.strip()) 
-
     if "Dato" in line:
         date = line.split()[1]
     
