@@ -13,7 +13,10 @@ Forventet output i de ulike brukstilfellene når kjørt etter hverandre
     - "Bestilling fullført! \nPris for 9 voksenbilletter: kr 3150"
     - Ved ingen ledige seter - "Det er desverre ikke 9 ledige plasser på noen rad. Bestilling avbrutt."
 
-4. brukerhistorie4.py - "Kongsemnene vises på denne datoen, og har solgt 65 billetter \n Størst av alt er kjærligheten vises på denne datoen, og har solgt 36 billetter"
+4. brukerhistorie4.py
+Skriv inn en dato på formatet "YYYY-MM-DD": 2024-02-03
+Kongsemnene vises på denne datoen, og har solgt 65 billetter.
+Størst av alt er kjærligheten vises på denne datoen, og har solgt 36 billetter.
 
 5. brukerhistorie5.py 
 Stykke: Kongsemnene                    | Skuespiller: Arturo Scotti                  | Rolle: Håkon Håkonson
