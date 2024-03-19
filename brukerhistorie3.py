@@ -23,7 +23,7 @@ INNER JOIN SeterTilBestilling ON
 
 # Initialisere variabler for å holde styr på de ledige setene i de ulike radene
 ticketcount = 9
-seats_by_rows = [[] for x in range(17)]
+seats_by_rows = [[] for _ in range(17)]
 selected_row = []
 
 # Gå gjennom alle setene og legg til de ledige setene i de ulike radene. Dersom det blir lagt til 9 seter på en rad, avslutt søket og raden settes som den valgte raden

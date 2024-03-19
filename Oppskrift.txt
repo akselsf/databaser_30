@@ -1,4 +1,4 @@
-Oppskrift for oppsett av databasen (oppgaver 1 til 3):
+Oppskrift for oppsett av databasen (oppgaver 1 til 2):
 
 Steg 1: kjør kommandoen "python initialize.py" i prosjektmappen
 
