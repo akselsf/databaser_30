@@ -6,5 +6,6 @@ cur = con.cursor()
 # Åpne initialize-filen og kjør SQL-koden
 file = open("initialize.sql", "r")
 cur.executescript(file.read())
-
 con.close()
+
+print("Database opprettet.")

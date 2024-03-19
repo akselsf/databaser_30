@@ -286,3 +286,5 @@ cur.execute("INSERT INTO Kundeprofil (navn, telefon, adresse) VALUES ('Gjest', '
 # Bekrefte endringene
 con.commit()
 cur.close()
+
+print("Data lagt inn i databasen.")

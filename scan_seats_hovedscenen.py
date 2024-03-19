@@ -48,3 +48,5 @@ for sold in sold_seats_parkett:
 con.commit()
 cur.close()
 file.close()
+
+print("Seter i hovedscenen lagt til i databasen.")

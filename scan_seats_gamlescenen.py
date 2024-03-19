@@ -52,3 +52,5 @@ for i in sold_seats:
 # Commit og lukk
 con.commit()
 con.close()
+
+print("Seter i gamlescenen lagt til i databasen.")
